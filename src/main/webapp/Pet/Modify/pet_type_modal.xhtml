@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Types" widgetVar="typeModal" appendToBody="true">
+		<p:dataTable id="types" var="type" value="#{typeDataTable.typeModel}"
+			selectionMode="single" selection="#{petDataTable.selectedType}"
+			lazy="true" paginator="true" rows="10"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			widgetVar="typeTable" filterEvent="enter">
+			<p:ajax event="rowSelect" listener="#{petDataTable.onTypeSelect}"
+				update="pets:pettype" oncomplete="PF('typeModal').hide();" />
+			<p:column headerText="ID" filterBy="#{type.typeId}"
+				sortBy="#{type.typeId}">
+				<h:outputText value="#{type.typeId}" />
+			</p:column>
+
+			<p:column headerText="Name" filterBy="#{type.typeName}"
+				sortBy="#{type.typeName}">
+				<h:outputText value="#{type.typeName}" />
+			</p:column>
+		</p:dataTable>
+
+		<script type="text/javascript"
+			src="/webapp/javascript/pet-clinic.filter-helper.js?ln=js">			
+		</script>
+
+
+	</p:dialog>
+</ui:composition>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="form">
+		<p:panel header="New Vet">
+			<h:panelGrid  columns="2" cellpadding="5">
+				<p:inputText id="firstname"
+					value="#{vetController.vet.vetFirstName}" required="true"
+					requiredMessage="First Name: can not be blank" />
+				<p:watermark for="firstname" value="Enter Vet First Name" />
+
+				<p:inputText id="lastname"
+					value="#{vetController.vet.vetLastName}" required="true"
+					requiredMessage="Last Name: can not be blank" />
+				<p:watermark for="lastname" value="Enter Vet Last Name" />
+
+				<p:commandButton value="Add Vet"
+					actionListener="#{vetController.save}" update="form"/>
+			</h:panelGrid>
+		</p:panel>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+	</h:form>
+
+</h:body>
+</html>
+

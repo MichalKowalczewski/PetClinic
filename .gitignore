@@ -1,0 +1,10 @@
+
+WebContent/META-INF/MANIFEST.MF
+target/
+.settings/
+*.jar
+src/test/java/com/tutki/PetClinic/AppTest.java
+.settings/org.eclipse.m2e.wtp.prefs
+.project
+.metadata/WebContent/WEB-INF/faces-config.pageflow
+.classpath

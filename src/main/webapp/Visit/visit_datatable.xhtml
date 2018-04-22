@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable id="visitsTable" var="visit"
+		value="#{visitDataTable.visitModel}" selectionMode="single"
+		selection="#{visitDataTable.selectedVisit}" lazy="true"
+		paginator="true" rows="10"
+		paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+		widgetVar="visitTable" filterEvent="enter">
+
+		<p:ajax event="rowSelect" listener="#{visitDataTable.onRowSelect}"
+			update="visits:dialog" oncomplete="PF('modifyDialog').show();" />
+
+		<p:column headerText="ID" filterBy="#{visitId}" sortBy="#{visitId}">
+			<h:outputText value="#{visit.visitId}" />
+		</p:column>
+
+		<p:column headerText="Pet Name" filterBy="#{pet.petName}"
+			sortBy="#{pet.petName}">
+			<h:outputText value="#{visit.pet.petName}" />
+		</p:column>
+
+		<p:column headerText="Pet Type" filterBy="#{type.typeName}"
+			sortBy="#{type.typeName}">
+			<h:outputText value="#{visit.pet.type.typeName}" />
+		</p:column>
+
+		<p:column headerText="Vet First Name" filterBy="#{vet.vetFirstName}"
+			sortBy="#{vet.vetFirstName}">
+			<h:outputText value="#{visit.vet.vetFirstName}" />
+		</p:column>
+
+		<p:column headerText="Vet Last Name" filterBy="#{vet.vetLastName}"
+			sortBy="#{vet.vetLastName}">
+			<h:outputText value="#{visit.vet.vetLastName}" />
+		</p:column>
+
+		<p:column headerText="Owner First Name"
+			filterBy="#{owner.ownerFirstName}" sortBy="#{owner.ownerFirstName}">
+			<h:outputText value="#{visit.pet.owner.ownerFirstName}" />
+		</p:column>
+
+		<p:column headerText="Owner Last Name"
+			filterBy="#{owner.ownerLastName}" sortBy="#{owner.ownerLastName}">
+			<h:outputText value="#{visit.pet.owner.ownerLastName}" />
+		</p:column>
+
+		<p:column headerText="Date" filterBy="#{visitDate}"
+			sortBy="#{visitDate}" filterMatchMode="exact">
+			<f:facet name="filter">
+				<p:calendar pattern="yyyy-MM-dd">
+					<p:ajax event="dateSelect" oncomplete="PF('visitTable').filter()" />
+				</p:calendar>
+			</f:facet>
+			<h:outputText value="#{visit.visitDate}" />
+		</p:column>
+	</p:dataTable>
+
+	<script type="text/javascript"
+		src="/webapp/javascript/pet-clinic.filter-helper.js?ln=js">	
+	</script>
+	
+	<ui:include src="../Visit/Modify/visit_modify_modal.xhtml" />
+
+</ui:composition>

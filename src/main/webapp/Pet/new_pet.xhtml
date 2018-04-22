@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="panel">
+		<p:panel header="New Pet">
+			<h:panelGrid id="test" columns="2" cellpadding="5">
+				<p:inputText id="petname" value="#{petController.pet.petName}" />
+				<p:watermark for="petname" value="Enter Pet Name" />
+
+				<p:inputText id="pettype" value="#{typeDataTable.selectedTypeName}"
+					onclick="PF('typeModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="pettype" value="Choose Pet Type" />
+
+				<p:inputText id="petowner" value="#{ownerDataTable.selectedOwnerFullName}"
+					onclick="PF('ownerModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="petowner" value="Choose Pet Owner" />
+
+				<p:commandButton value="Add Pet"
+					actionListener="#{petController.save}" update="panel"/>
+			</h:panelGrid>
+		</p:panel>
+
+		<ui:include src="../Owner/owner_modal.xhtml" />
+		<ui:include src="../Type/type_modal.xhtml" />
+
+		<p:growl id="growl" showDetail="true" sticky="true" />
+
+	</h:form>
+</h:body>
+</html>

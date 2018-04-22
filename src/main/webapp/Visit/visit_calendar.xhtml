@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="form">
+		<p:panel id="visitvet" header="New Visit">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:inputText id="vet"
+					value="#{vetDataTable.selectedVetFullName}"
+					onclick="PF('vetModal').show();"
+					converter="omnifaces.SelectItemsConverter">
+				</p:inputText>
+				<p:watermark for="visitvet" value="Choose Vet" />
+				<br />
+				<p:schedule id="schedule" value="#{vetSchedule.lazyEventModel}" />
+			</h:panelGrid>
+		</p:panel>
+		<ui:include src="../Vet/vet_modal.xhtml" />
+	</h:form>
+
+</h:body>
+</html>
+

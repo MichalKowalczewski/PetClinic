@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="panel">
+		<p:panel header="New Owner">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:inputText id="firstname"
+					value="#{ownerController.owner.ownerFirstName}" required="true"
+					requiredMessage="First Name: can not be blank" />
+				<p:watermark for="firstname" value="Enter Owner First Name" />
+
+				<p:inputText id="lastname"
+					value="#{ownerController.owner.ownerLastName}" required="true"
+					requiredMessage="Last Name: can not be blank" />
+				<p:watermark for="lastname" value="Enter Owner Last Name" />
+
+				<p:inputText id="address" value="#{ownerController.owner.address}" />
+				<p:watermark for="address" value="Enter Owner Adress" />
+
+				<p:inputText id="city" value="#{ownerController.owner.city}" />
+				<p:watermark for="city" value="Enter Owner City" />
+
+				<p:inputText id="phone" value="#{ownerController.owner.phone}"
+					converterMessage="Telephone No.: Please enter digits only." />
+				<p:watermark for="phone" value="Enter Owner Telephone No." />
+
+				<p:commandButton value="Add Pet"
+					actionListener="#{ownerController.save}" update="panel">
+					<f:ajax update="growl" />
+				</p:commandButton>
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+</h:body>
+</html>
+
+

@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="dialog" header="Modify Owner" widgetVar="modifyDialog"
+		minHeight="40">
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="pet" value="First Name">
+				<br />
+				<p:inputText id="petname"
+					value="#{petDataTable.selectedPet.petName}" required="true"
+					requiredMessage="Pet Name: can not be blank" />
+				<p:watermark for="petname" value="Enter Pet Name" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Pet Type">
+				<br />
+				<p:inputText id="pettype"
+					value="#{petDataTable.selectedPetTypeName}"
+					onclick="PF('typeModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="pettype" value="Choose Pet Type" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Pet Owner">
+				<br />
+				<p:inputText id="petowner"
+					value="#{petDataTable.selectedPetOwnerName}"
+					onclick="PF('ownerModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="petowner" value="Choose Pet Owner" />
+			</h:outputLabel>
+
+		</h:panelGrid>
+		<br />
+
+		<ui:include src="../Modify/pet_type_modal.xhtml" />
+
+		<p:commandButton value="Modify"
+			actionListener="#{petController.modify}" update="pets:petsTable"
+			oncomplete="PF('modifyDialog').hide();">
+			<p:confirm header="Confirmation"
+				message="Are you sure you want to modify this field?" />
+		</p:commandButton>
+
+		<p:commandButton value="Cancel" update="pets:petsTable"
+			oncomplete="PF('modifyDialog').hide();">
+		</p:commandButton>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</p:dialog>
+</ui:composition>

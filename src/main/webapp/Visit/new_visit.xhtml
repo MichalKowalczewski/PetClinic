@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="form">
+		<p:panel header="New Visit">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:inputText readonly = "true" id="visitpet" value="#{petDataTable.selectedPetName}"
+					onclick="PF('petModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="visitpet" value="Choose Pet" />
+				
+				<p:inputText readonly = "true" id="visitvet" value="#{vetDataTable.selectedVetFullName}"
+					onclick="PF('vetModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="visitvet" value="Choose Vet" />
+				
+				<p:calendar id="datetime" value="#{visitController.visit.visitDate}" pattern="yyyy-MM-dd HH:mm" />
+				<p:watermark for="datetime" value="Choose Visit Date" />
+
+				<p:commandButton value="Add Visit"
+					actionListener="#{visitController.save}" update="form" />
+			</h:panelGrid>
+		</p:panel>
+
+		<ui:include src="../Pet/pet_modal.xhtml" />
+		<ui:include src="../Vet/vet_modal.xhtml" />
+
+		<p:growl id="growl" showDetail="true" sticky="true" />
+	</h:form>
+
+</h:body>
+</html>
+

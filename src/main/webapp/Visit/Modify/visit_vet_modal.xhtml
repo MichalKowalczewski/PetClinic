@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Vets" widgetVar="vetModal">
+		<p:dataTable id="vets" var="vet" value="#{vetDataTable.vetModel}"
+			selectionMode="single" selection="#{visitDataTable.selectedVet}"
+			lazy="true" paginator="true" rows="10"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			widgetVar="vetTable" filterEvent="enter">
+			<p:ajax event="rowSelect" listener="#{visitDataTable.onVetSelect}"
+				update="visits:visitvet" oncomplete="PF('vetModal').hide();" />
+			<p:column headerText="ID" filterBy="#{vetId}" sortBy="#{vetId}">
+				<h:outputText value="#{vet.vetId}" />
+			</p:column>
+
+			<p:column headerText="Vet Name" filterBy="#{vetFirstName}"
+				sortBy="#{vetFirstName}">
+				<h:outputText value="#{vet.vetFirstName}" />
+			</p:column>
+
+			<p:column headerText="Vet Last Name" filterBy="#{vetLastName}"
+				sortBy="#{vetLastName}">
+				<h:outputText value="#{vet.vetLastName}" />
+			</p:column>
+		</p:dataTable>
+
+		<script type="text/javascript"
+			src="/webapp/javascript/pet-clinic.filter-helper.js?ln=js">			
+		</script>
+	</p:dialog>
+</ui:composition>

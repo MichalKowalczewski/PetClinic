@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable id="petsTable" var="pet" value="#{petDataTable.petModel}" selectionMode="single" 
+	    selection="#{petDataTable.selectedPet}" lazy="true" paginator="true" rows="10"
+		paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+		widgetVar="petTable" filterEvent="enter">
+
+		<p:ajax event="rowSelect" listener="#{petDataTable.onRowSelect}"
+			update="pets:dialog" oncomplete="PF('modifyDialog').show();" />
+
+		<p:column headerText="ID" filterBy="#{petId}" sortBy="#{petId}">
+			<h:outputText value="#{pet.petId}" />
+		</p:column>
+
+		<p:column headerText="Pet Name" filterBy="#{petName}"
+			sortBy="#{petName}">
+			<h:outputText value="#{pet.petName}" />
+		</p:column>
+
+		<p:column headerText="Owner First Name"
+			filterBy="#{owner.ownerFirstName}" sortBy="#{owner.ownerFirstName}">
+			<h:outputText value="#{pet.owner.ownerFirstName}" />
+		</p:column>
+
+		<p:column headerText="Owner Last Name"
+			filterBy="#{owner.ownerLastName}" sortBy="#{owner.ownerLastName}">
+			<h:outputText value="#{pet.owner.ownerLastName}" />
+		</p:column>
+
+		<p:column headerText="Type" filterBy="#{type.typeName}"
+			sortBy="#{type.typeName}">
+			<h:outputText value="#{pet.type.typeName}" />
+		</p:column>
+	</p:dataTable>
+
+	<script type="text/javascript"
+		src="/webapp/javascript/pet-clinic.filter-helper.js?ln=js">		
+	</script>
+
+	<ui:include src="../Pet/Modify/pet_modify_modal.xhtml" />
+
+</ui:composition>

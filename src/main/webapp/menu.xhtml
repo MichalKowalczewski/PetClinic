@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:menubar>
+		<p:menuitem value="Home" icon="ui-icon-home" url="/" />
+
+		<p:submenu label="Owner">
+			<p:menuitem value="Add new Owner" url="/Owner/new_owner.xhtml" />
+			<p:menuitem value="Show all Owners" url="/Owner/owners.xhtml" />
+		</p:submenu>
+
+		<p:submenu label="Pet">
+			<p:menuitem value="Add new Pet" url="/Pet/new_pet.xhtml" />
+			<p:menuitem value="Show all Pets" url="/Pet/pets.xhtml" />
+		</p:submenu>
+
+		<p:submenu label="Visit">
+			<p:menuitem value="Shedule a Visit" url="/Visit/new_visit.xhtml" />
+			<p:menuitem value="Show all Visits" url="/Visit/visits.xhtml" />
+			<p:menuitem value="Vet Calendar" url="/Visit/visit_calendar.xhtml" />
+		</p:submenu>
+
+		<p:submenu label="Vet">
+			<p:menuitem value="Add Vet" url="/Vet/new_vet.xhtml" />
+			<p:menuitem value="Show all Vets" url="/Vet/vets.xhtml" />
+		</p:submenu>
+	</p:menubar>
+</ui:composition>
+

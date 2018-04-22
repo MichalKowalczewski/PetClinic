@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="dialog" header="Modify Owner" widgetVar="modifyDialog"
+		minHeight="40">
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="firstname" value="First Name">
+				<br />
+				<p:inputText id="firstname"
+					value="#{ownerDataTable.selectedOwner.ownerFirstName}"
+					required="true" requiredMessage="First Name: can not be blank" />
+				<p:watermark for="lastname" value="Enter Owner First Name" />
+			</h:outputLabel>
+
+
+			<h:outputLabel value="Last Name">
+				<br />
+				<p:inputText id="lastname"
+					value="#{ownerDataTable.selectedOwner.ownerLastName}"
+					required="true" requiredMessage="Last Name: can not be blank" />
+				<p:watermark for="lastname" value="Enter Owner Last Name" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Address">
+				<br />
+				<p:inputText id="address"
+					value="#{ownerDataTable.selectedOwner.address}" />
+				<p:watermark for="address" value="Enter Owner Adress" />
+			</h:outputLabel>
+
+			<h:outputLabel value="City">
+				<br />
+				<p:inputText id="city" value="#{ownerDataTable.selectedOwner.city}" />
+				<p:watermark for="city" value="Enter Owner City" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Phone">
+				<br />
+				<p:inputText id="phone"
+					value="#{ownerDataTable.selectedOwner.phone}"
+					converterMessage="Telephone No.: Please enter digits only." />
+				<p:watermark for="phone" value="Enter Owner Telephone No." />
+			</h:outputLabel>
+		</h:panelGrid>
+		<br />
+
+		<p:commandButton value="Modify"
+			actionListener="#{ownerController.modify}"
+			update="owners:ownersTable" oncomplete="PF('modifyDialog').hide();">
+			<p:confirm header="Confirmation"
+				message="Are you sure you want to modify this field?" />
+		</p:commandButton>
+
+		<p:commandButton value="Cancel" update="owners:ownersTable"
+			oncomplete="PF('modifyDialog').hide();">
+		</p:commandButton>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</p:dialog>
+</ui:composition>

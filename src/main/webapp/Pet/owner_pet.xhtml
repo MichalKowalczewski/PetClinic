@@ -1,0 +1,56 @@
+<!--  
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:include src="../menu.xhtml" />
+	<h:form id="panel">
+		<p:panel header="New Visit">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:selectOneMenu id="ownerpet"
+					value="#{displayPets.displayOwners.owner.ownerId}"
+					style="width:125px">
+					<f:selectItem itemLabel="Select Owner" itemValue="" />
+					<f:selectItems value="#{displayPets.displayOwners.owners}"
+						var="owner" itemLabel="#{owner.ownerFullName}"
+						itemValue="#{owner.ownerId}" />
+					<f:ajax render="pettable" />
+				</p:selectOneMenu>
+				<br />
+				<p:dataTable id="pettable" var="pet"
+					value="#{displayPets.ownerPets}">
+					<p:column headerText="ID">
+						<h:outputText value="#{pet.petId}" />
+					</p:column>
+
+					<p:column headerText="Name">
+						<h:outputText value="#{pet.petName}" />
+					</p:column>
+
+					<p:column headerText="Type">
+						<h:outputText value="#{pet.petType}" />
+					</p:column>
+
+					<p:column headerText="Owner Name">
+						<h:outputText value="#{pet.petOwner}" />
+					</p:column>
+				</p:dataTable>
+
+
+			</h:panelGrid>
+		</p:panel>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+	</h:form>
+
+</h:body>
+</html>
+
+-->

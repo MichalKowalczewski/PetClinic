@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="dialog" header="Modify Owner" widgetVar="modifyDialog"
+		minHeight="40">
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<h:outputLabel for="pet" value="Pet Name">
+				<br />
+				<p:inputText readonly="true" id="visitpet"
+					value="#{visitDataTable.selectedVisitPetName}"
+					onclick="PF('petModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="visitpet" value="Choose Pet" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Vet Name">
+				<br />
+				<p:inputText readonly="true" id="visitvet"
+					value="#{visitDataTable.selectedVisitVetName}"
+					onclick="PF('vetModal').show();"
+					converter="omnifaces.SelectItemsConverter" />
+				<p:watermark for="visitvet" value="Choose Vet" />
+			</h:outputLabel>
+
+			<h:outputLabel value="Visit Date">
+				<br />
+				<p:calendar id="datetime" value="#{visitDataTable.selectedVisit.visitDate}"
+					pattern="yyyy-MM-dd HH:mm" />
+				<p:watermark for="datetime" value="Choose Visit Date" />
+			</h:outputLabel>
+
+		</h:panelGrid>
+		<br />
+
+		<ui:include src="../Modify/visit_vet_modal.xhtml" />
+		<ui:include src="../Modify/visit_pet_modal.xhtml" />
+
+		<p:commandButton value="Modify"
+			actionListener="#{visitController.modify}" update="visits:visitsTable"
+			oncomplete="PF('modifyDialog').hide();">
+			<p:confirm header="Confirmation"
+				message="Are you sure you want to modify this field?" />
+		</p:commandButton>
+
+		<p:commandButton value="Cancel" update="visits:visitsTable"
+			oncomplete="PF('modifyDialog').hide();">
+		</p:commandButton>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</p:dialog>
+</ui:composition>
